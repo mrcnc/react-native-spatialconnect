@@ -1,5 +1,5 @@
 /**
- * Copyright 2015-2017 Boundless, http://boundlessgeo.com
+ * Copyright 2015-2018 Boundless, http://boundlessgeo.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import java.util.List;
 
 public class RNSpatialConnectPackage implements ReactPackage {
 
-    @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
     }

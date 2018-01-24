@@ -45,14 +45,13 @@ android {
 repositories {
     jcenter()
     mavenCentral()
-    maven {
-        url "https://repo.eclipse.org/content/repositories/paho-releases/"
-    }
+    maven { url "https://repo.eclipse.org/content/repositories/paho-releases/" }
+    maven { url "https://repo.boundlessgeo.com/release" }
 }
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
-    compile("com.boundlessgeo.spatialconnect:spatialconnect:0.11.5") {
+    compile("com.boundlessgeo.spatialconnect:spatialconnect:0.13.0") {
       exclude module: 'support-v4'
     }
 }
