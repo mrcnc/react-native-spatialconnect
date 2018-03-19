@@ -155,10 +155,11 @@ public class RNSpatialConnect extends ReactContextBaseJavaModule {
     }
 
     /**
-     * Handles a message sent from Javascript.  Expects the message envelope to look like:
-     * <code>{"type":<String>,"payload":<JSON Object>}</code>
+     * Handles a message sent from JavaScript.  Expects the message envelope to look like:
+     * <code>{"type":<String>, "payload":<JSON Object>, "responseId":<String>}</code> where the
+     * only required attribute is "type".
      *
-     * @param message message from javascript
+     * @param message message from JavaScript
      */
     @ReactMethod
     public void handler(final ReadableMap message) {
@@ -186,7 +187,7 @@ public class RNSpatialConnect extends ReactContextBaseJavaModule {
                 WritableMap newAction = Arguments.createMap();
                 newAction.putString("type", message.getString("type"));
                 newAction.putString("payload", e.getLocalizedMessage());
-
+                Log.e(LOG_TAG, "bridge subscriber error", e);
                 sendEvent(newAction, SCBridgeStatus.ERROR, type);
             }
 
@@ -209,7 +210,9 @@ public class RNSpatialConnect extends ReactContextBaseJavaModule {
             type = type + "_error";
         }
 
-        Log.v(LOG_TAG, "JS <-- sdk: " + type + " :: " + newAction.toString());
+        if (!newAction.toString().contains("QUERY")) {
+            Log.v(LOG_TAG, "JS <-- sdk: " + type + " :: " + newAction.toString());
+        }
 
         reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(type, newAction);
     }
